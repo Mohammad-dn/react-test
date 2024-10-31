@@ -1,0 +1,133 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "WebAPIForExam",
+    "version": "1.0"
+  },
+  "paths": {
+    "/webapi/Account/Login": {
+      "post": {
+        "tags": ["Account"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebAPI_Account_Login_Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebAPI_Account_Login_Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebAPI_Account_Login_Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/webapi/Request/GetVehicleUsers": {
+      "get": {
+        "tags": ["Request"],
+        "parameters": [
+          {
+            "name": "SearchTerm",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "minLength": 2,
+              "type": "string"
+            }
+          },
+          {
+            "name": "UserToken",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/webapi/Request/SendRequest": {
+      "post": {
+        "tags": ["Request"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebAPI_Request_SendRequest_Request"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebAPI_Request_SendRequest_Request"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WebAPI_Request_SendRequest_Request"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "WebAPI_Account_Login_Request": {
+        "required": ["password", "username"],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WebAPI_Request_SendRequest_Request": {
+        "required": ["destination", "source", "userToken", "vehicleUserTypeId"],
+        "type": "object",
+        "properties": {
+          "userToken": {
+            "type": "string"
+          },
+          "vehicleUserTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "source": {
+            "type": "string"
+          },
+          "destination": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
